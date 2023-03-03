@@ -1,0 +1,20 @@
+package lection_08_InterfacesAndAbstraction_Exercise.birthdayCelebrations;
+
+public class Pet implements Birthable {
+    private String name;
+    private String birthdate;
+
+    public Pet(String name, String birthdate) {
+        this.name = name;
+        this.birthdate = birthdate;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public String getBirthDate() {
+        return this.birthdate;
+    }
+}
