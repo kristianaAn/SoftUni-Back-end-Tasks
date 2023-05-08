@@ -1,3 +1,3 @@
 # SoftUni-Back-end-Tasks
 
-My Java Advanced & Java OOP tasks solved (Sep 2022).
+My SoftUni solved tasks from the modules Java Fundamentals, Java Advanced & Java OOP, Data Structures Fundamentals (May 2022 - December 2022).
