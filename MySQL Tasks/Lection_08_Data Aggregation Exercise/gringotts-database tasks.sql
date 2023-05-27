@@ -85,3 +85,25 @@ FROM
     `wizzard_deposits`
 GROUP BY `age_group`
 ORDER BY `wizard_count` ASC;
+
+-- 10. First Letter
+SELECT DISTINCT
+    LEFT(`first_name`, 1) AS 'first_letter'
+FROM
+    `wizzard_deposits`
+WHERE
+    `deposit_group` = 'Troll Chest'
+GROUP BY `first_name`
+ORDER BY `first_letter` ASC;
+
+-- 11. Average Interest
+SELECT 
+    `deposit_group`,
+    `is_deposit_expired`,
+    AVG(`deposit_interest`)
+FROM
+    `wizzard_deposits`
+WHERE
+    `deposit_start_date` > '1985-01-01'
+GROUP BY `deposit_group` , `is_deposit_expired`
+ORDER BY `deposit_group` DESC , `is_deposit_expired` ASC;
