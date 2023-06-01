@@ -175,3 +175,18 @@ CREATE TABLE `agenda`(
   CONSTRAINT fk_agenda_student_id FOREIGN KEY(`student_id`) REFERENCES `students`(`student_id`),
   CONSTRAINT fk_agenda_subject_id FOREIGN KEY(`subject_id`) REFERENCES `subjects`(`subject_id`)
 );
+
+-- 9. Peaks in Rila
+USE `geography`;
+	
+SELECT 
+    m.`mountain_range`,
+    p.`peak_name`,
+    p.`elevation` AS 'peak_elevation'
+FROM
+    `mountains` AS m
+        JOIN
+    `peaks` AS p ON p.`mountain_id` = m.`id`
+WHERE
+    `mountain_range` = 'Rila'
+ORDER BY `peak_elevation` DESC;
