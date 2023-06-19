@@ -35,7 +35,6 @@ public class Main_diablo_DB {
         prepStmt.setString(1, userName);
         ResultSet result = prepStmt.executeQuery();
 
-
             if (result.next()) {
                 System.out.printf("User: %s%n%s %s has played %d games", userName,
                         result.getString("first_name"), result.getString("last_name"), result.getInt("count"));
