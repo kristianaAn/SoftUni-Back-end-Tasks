@@ -11,7 +11,7 @@ import static orm.MyConnector.getConnection;
 
 public class Main {
     public static void main(String[] args) throws SQLException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException {
-        createConnection("root", "~123456", "custom-orm");
+        createConnection("USERNAME", "PASSWORD", "custom-orm");
         Connection connection = getConnection();
 
         EntityManager<User> userEntityManager = new EntityManager<>(connection);
