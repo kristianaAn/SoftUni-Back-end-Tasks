@@ -141,5 +141,12 @@ public class Employee {
         System.out.printf("%s %s - %s%n%s", this.firstName, this.lastName, this.jobTitle, projectNames);
     }
 
+    public void printEmployeeWithIncreasedSalary() {
+        System.out.printf("%s %s ($%.2f)%n", this.firstName, this.lastName, this.salary);
+    }
 
+    public void printEmployeeData() {
+        System.out.printf("%s %s - %s - ($%.2f)%n",
+                this.firstName, this.lastName, this.jobTitle, this.salary);
+    }
 }
