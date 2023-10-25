@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 @Table(name = "roles")
 @Getter
-@Setter
 public class UserRole extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
@@ -21,5 +20,10 @@ public class UserRole extends BaseEntity {
     private List<UserRole> roles;
 
     public UserRole() {
+    }
+
+    public UserRole setRole(Role role) {
+        this.role = role;
+        return this;
     }
 }
