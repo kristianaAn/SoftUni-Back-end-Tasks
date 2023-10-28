@@ -1,57 +1,63 @@
 package com.softuni.mobilele.domain.dtos;
 
-public class UserDTO extends BaseEntityDTO {
+import com.softuni.mobilele.domain.enums.Role;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+public class UserDTO {
+    @NotNull
+    @Size(min = 5, max = 20)
     private String firstName;
+
+    @NotNull
     private String lastName;
+
+    @NotNull
     private String username;
+
+    @NotNull
     private String password;
-    private String role;
-    public UserDTO(long id) {
-        super(id);
-    }
+
+    @NotNull
+    private Role role;
 
     public String getFirstName() {
         return firstName;
     }
 
-    public UserDTO setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
-        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public UserDTO setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
-        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public UserDTO setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
-        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public UserDTO setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
-        return this;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public UserDTO setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
-        return this;
     }
 }

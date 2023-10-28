@@ -2,6 +2,7 @@ package com.softuni.mobilele.web;
 
 import com.softuni.mobilele.domain.dtos.LoginUserDTO;
 import com.softuni.mobilele.domain.dtos.UserDTO;
+import com.softuni.mobilele.domain.entities.User;
 import com.softuni.mobilele.services.UserRoleService;
 import com.softuni.mobilele.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
@@ -31,22 +34,27 @@ public class UserController extends BaseController {
     @GetMapping("/register")
     public ModelAndView getRegister(ModelAndView modelAndView) {
         modelAndView.addObject("userRoles", userRoleService.getAllUserRoles());
-        return super.view("auth-register", modelAndView);
+        modelAndView.setViewName("auth-register");
+        return modelAndView;
     }
 
     @PostMapping("/register")
-    public ModelAndView postRegister(UserDTO userDTO) {
+    public String postRegister(UserDTO userDTO) {
         userService.saveUserRegistrationInfo(userDTO);
-        return super.view("auth-login");
+        return "redirect:/users/login";
     }
 
     @GetMapping("/login")
-    public ModelAndView getLoginPage(ModelAndView mv) {
+    public ModelAndView getLoginPage() {
         return super.view("auth-login");
     }
 
     @PostMapping("/login")
-    public ModelAndView loggingIn(LoginUserDTO loginUserDTO) {
-        return redirect("/index");
+    public String loggingIn(LoginUserDTO loginUserDTO) {
+        Optional<User> optionalUser = userService.findUserByCredentials(loginUserDTO);
+        if (optionalUser.isPresent()) {
+            return "redirect:/";
+        }
+        return "redirect:/users/login";
     }
 }
