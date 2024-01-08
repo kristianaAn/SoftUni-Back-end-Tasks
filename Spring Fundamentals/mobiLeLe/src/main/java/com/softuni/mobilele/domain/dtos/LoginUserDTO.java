@@ -1,5 +1,7 @@
 package com.softuni.mobilele.domain.dtos;
 
+import jakarta.validation.constraints.NotNull;
+
 public class LoginUserDTO {
     private String username;
     private String password;
@@ -7,6 +9,13 @@ public class LoginUserDTO {
     public LoginUserDTO() {
     }
 
+    public LoginUserDTO(long id, String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+
+    @NotNull
     public String getUsername() {
         return username;
     }
@@ -16,6 +25,7 @@ public class LoginUserDTO {
         return this;
     }
 
+    @NotNull
     public String getPassword() {
         return password;
     }

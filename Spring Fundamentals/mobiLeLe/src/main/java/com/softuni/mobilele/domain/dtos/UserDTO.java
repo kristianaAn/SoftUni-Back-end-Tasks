@@ -4,9 +4,10 @@ import com.softuni.mobilele.domain.enums.Role;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class UserDTO {
-    @NotNull
+public class UserDTO extends BaseEntityDTO{
+
     @Size(min = 5, max = 20)
+    @NotNull
     private String firstName;
 
     @NotNull
@@ -20,6 +21,9 @@ public class UserDTO {
 
     @NotNull
     private Role role;
+
+    public UserDTO() {
+    }
 
     public String getFirstName() {
         return firstName;

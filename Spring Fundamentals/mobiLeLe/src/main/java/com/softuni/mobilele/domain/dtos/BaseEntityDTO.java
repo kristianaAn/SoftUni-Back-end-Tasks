@@ -7,6 +7,9 @@ public class BaseEntityDTO {
         this.id = id;
     }
 
+    public BaseEntityDTO() {
+    }
+
     public long getId() {
         return id;
     }

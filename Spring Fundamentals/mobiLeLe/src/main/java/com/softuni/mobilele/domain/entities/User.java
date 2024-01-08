@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 public class User extends BaseEntity {
 
-    @Column
+    @Column(unique = true)
     private String username;
 
     @Column
