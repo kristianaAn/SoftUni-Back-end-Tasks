@@ -47,9 +47,15 @@ public class UserServiceImpl implements UserService {
             this.loggedUser.setId(userDTO.getId());
             this.loggedUser.setUsername(userDTO.getUsername());
             this.loggedUser.setFirstName(userDTO.getFirstName());
+            this.loggedUser.setRole(String.valueOf(userDTO.getRole()));
         }
 
         return userDTO;
 
+    }
+
+    @Override
+    public void logout(){
+        this.loggedUser.clearFieldsData();
     }
 }

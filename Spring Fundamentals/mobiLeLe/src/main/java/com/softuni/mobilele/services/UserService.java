@@ -7,4 +7,6 @@ public interface UserService {
     UserDTO saveUserRegistrationInfo(UserDTO userDTO);
 
     UserDTO loginUser(LoginUserDTO loginUser);
+
+    void logout();
 }

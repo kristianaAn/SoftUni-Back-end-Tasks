@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -23,10 +24,6 @@ public class UserController extends BaseController {
         this.userRoleService = userRoleService;
         this.userService = userService;
     }
-
-//    public UserController(UserRoleService userRoleService) {
-//        this.userRoleService = userRoleService;
-//    }
 
     @GetMapping("/register")
     public ModelAndView getRegister(ModelAndView modelAndView) {
@@ -54,5 +51,12 @@ public class UserController extends BaseController {
         }
         return "redirect:/users/login";
 
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public String logoutUser() {
+        this.userService.logout();
+
+        return "redirect:/";
     }
 }
