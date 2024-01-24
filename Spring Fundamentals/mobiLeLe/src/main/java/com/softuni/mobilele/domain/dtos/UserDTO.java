@@ -20,6 +20,8 @@ public class UserDTO extends BaseEntityDTO{
     private String password;
 
     @NotNull
+    private String confirmPassword;
+    @NotNull
     private Role role;
 
     public UserDTO() {
@@ -55,6 +57,14 @@ public class UserDTO extends BaseEntityDTO{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Role getRole() {

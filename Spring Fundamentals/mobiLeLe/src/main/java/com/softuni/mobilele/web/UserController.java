@@ -4,13 +4,13 @@ import com.softuni.mobilele.domain.dtos.LoginUserDTO;
 import com.softuni.mobilele.domain.dtos.UserDTO;
 import com.softuni.mobilele.services.UserRoleService;
 import com.softuni.mobilele.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/users")
@@ -33,8 +33,12 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/register")
-    public String postRegister(UserDTO user) {
-        userService.saveUserRegistrationInfo(user);
+    public String postRegister(@Valid @ModelAttribute(name = "userDTO") UserDTO userDTO, BindingResult bindingResult, RedirectAttributes redirectAttr) {
+        if (bindingResult.hasErrors()) {
+            
+        }
+
+        userService.saveUserRegistrationInfo(userDTO);
         return "redirect:/users/login";
     }
 
