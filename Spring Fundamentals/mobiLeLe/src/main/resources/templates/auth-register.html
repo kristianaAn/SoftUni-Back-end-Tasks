@@ -29,7 +29,8 @@
                 <label for="lastName" class="text-white font-weight-bold">Last Name</label>
                 <input id="lastName" name="lastName" type="text" min="2" max="20" class="form-control"
                        placeholder="Last name"/>
-                <p class="errors alert alert-danger">
+                <p th:if="${#fields.hasErrors('lastName')}"
+                        class="errors alert alert-danger">
                     Last name is required.
                 </p>
             </div>
@@ -39,7 +40,8 @@
                 <label for="username" class="text-white font-weight-bold">Username</label>
                 <input id="username" name="username" type="text" min="2" max="20" class="form-control"
                        placeholder="Username"/>
-                <p class="errors alert alert-danger">
+                <p th:if="${#fields.hasErrors('username')}"
+                        class="errors alert alert-danger">
                     Username is required.
                 </p>
             </div>
@@ -50,7 +52,8 @@
                 <label for="password" class="text-white font-weight-bold">Password</label>
                 <input id="password" name="password" type="password" min="2" max="20" class="form-control"
                        placeholder="Password"/>
-                <p class="errors alert alert-danger">
+                <p th:if="${#fields.hasErrors('password')}"
+                        class="errors alert alert-danger">
                     Password is required.
                 </p>
             </div>
@@ -58,7 +61,8 @@
                 <label for="confirmPassword" class="text-white font-weight-bold">Confirm Password</label>
                 <input id="confirmPassword" name="confirmPassword" type="password" min="2" max="20" class="form-control"
                        placeholder="Confirm Password"/>
-                <p class="errors alert alert-danger">
+                <p th:if="${#fields.hasErrors('confirmPassword')}"
+                        class="errors alert alert-danger">
                     Passwords do not match.
                 </p>
             </div>
@@ -73,7 +77,8 @@
 
 
             </select>
-            <p class="errors alert alert-danger">
+            <p th:if="${#fields.hasErrors('role')}"
+                    class="errors alert alert-danger">
                 Selecting a role is required.
             </p>
         </div>

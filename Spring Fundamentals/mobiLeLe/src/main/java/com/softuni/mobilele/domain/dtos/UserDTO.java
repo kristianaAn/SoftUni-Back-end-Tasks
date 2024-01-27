@@ -11,15 +11,19 @@ public class UserDTO extends BaseEntityDTO{
     private String firstName;
 
     @NotNull
+    @Size(min = 5, max = 20)
     private String lastName;
 
     @NotNull
+    @Size(min = 5, max = 20)
     private String username;
 
     @NotNull
+    @Size(min = 5, max = 20)
     private String password;
 
     @NotNull
+    @Size(min = 5, max = 20)
     private String confirmPassword;
     @NotNull
     private Role role;

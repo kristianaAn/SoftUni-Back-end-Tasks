@@ -26,31 +26,28 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/register")
-    public ModelAndView getRegister(ModelAndView modelAndView) {
+    public ModelAndView getRegister(ModelAndView modelAndView, UserDTO userDTO) {
         modelAndView.addObject("userRoles", userRoleService.getAllUserRoles());
         modelAndView.setViewName("auth-register");
         return modelAndView;
     }
 
     @PostMapping("/register")
-    public String postRegister(@Valid @ModelAttribute(name = "userDTO") UserDTO userDTO, BindingResult bindingResult, RedirectAttributes redirectAttr) {
-        if (bindingResult.hasErrors()) {
-            
-        }
+    public String postRegister(@Valid @ModelAttribute UserDTO userDTO) {
 
         userService.saveUserRegistrationInfo(userDTO);
         return "redirect:/users/login";
     }
 
     @GetMapping("/login")
-    public ModelAndView getLoginPage() {
+    public ModelAndView getLoginPage(LoginUserDTO loginUser) {
         return super.view("auth-login");
     }
 
     @PostMapping("/login")
-    public String loggingIn(LoginUserDTO loginUser) {
+    public String loggingIn(@Valid @ModelAttribute LoginUserDTO loginUserDTO) {
 
-        if (this.userService.loginUser(loginUser).getId() > 0) {
+        if (this.userService.loginUser(loginUserDTO).getId() > 0) {
             return "redirect:/";
         }
         return "redirect:/users/login";
