@@ -2,6 +2,7 @@ package com.softuni.mobilele.web;
 
 import com.softuni.mobilele.domain.dtos.LoginUserDTO;
 import com.softuni.mobilele.domain.dtos.UserDTO;
+import com.softuni.mobilele.domain.entities.UserRole;
 import com.softuni.mobilele.services.UserRoleService;
 import com.softuni.mobilele.services.UserService;
 import jakarta.validation.Valid;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/users")
@@ -26,17 +26,25 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/register")
-    public ModelAndView getRegister(ModelAndView modelAndView, UserDTO userDTO) {
-        modelAndView.addObject("userRoles", userRoleService.getAllUserRoles());
-        modelAndView.setViewName("auth-register");
-        return modelAndView;
+    public ModelAndView getRegister(@ModelAttribute(name = "userRoles") UserRole userRole, UserDTO userDTO, ModelAndView mv) {
+        addUserRolesToView(mv, userRole);
+        mv.setViewName("auth-register");
+        return mv;
     }
 
     @PostMapping("/register")
-    public String postRegister(@Valid @ModelAttribute UserDTO userDTO) {
+    public ModelAndView postRegister(@Valid @ModelAttribute(name = "userDTO") UserDTO userRegData,
+                               BindingResult bindingResult, ModelAndView modelAndView, UserRole userRole, LoginUserDTO loginUser) {
 
-        userService.saveUserRegistrationInfo(userDTO);
-        return "redirect:/users/login";
+        if (bindingResult.hasErrors()) {
+            addUserRolesToView(modelAndView, userRole);
+            modelAndView.setViewName("auth-register");
+            return modelAndView;
+        }
+
+        userService.saveUserRegistrationInfo(userRegData);
+        modelAndView.setViewName("auth-login");
+        return modelAndView;
     }
 
     @GetMapping("/login")
@@ -60,4 +68,9 @@ public class UserController extends BaseController {
 
         return "redirect:/";
     }
+
+    private void addUserRolesToView(ModelAndView modelAndView, UserRole userRole) {
+        modelAndView.addObject("userRoles", userRoleService.getAllUserRoles());
+    }
+
 }

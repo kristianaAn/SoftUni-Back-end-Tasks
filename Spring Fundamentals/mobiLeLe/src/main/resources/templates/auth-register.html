@@ -18,8 +18,13 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
-                <input id="firstName" name="firstName" type="text" min="2" max="20" class="form-control"
-                       placeholder="First name"/>
+                <input id="firstName"
+                       name="firstName"
+                       type="text"
+                       min="2" max="20"
+                       class="form-control"
+                       placeholder="First name"
+                th:value="*{firstName}" />
                 <p th:if="${#fields.hasErrors('firstName')}"
                         class="errors alert alert-danger">
                     First name is required.
@@ -27,8 +32,13 @@
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="lastName" class="text-white font-weight-bold">Last Name</label>
-                <input id="lastName" name="lastName" type="text" min="2" max="20" class="form-control"
-                       placeholder="Last name"/>
+                <input id="lastName"
+                       name="lastName"
+                       type="text"
+                       min="2" max="20"
+                       class="form-control"
+                       placeholder="Last name"
+                th:value="*{lastName}" />
                 <p th:if="${#fields.hasErrors('lastName')}"
                         class="errors alert alert-danger">
                     Last name is required.
@@ -38,8 +48,13 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="username" class="text-white font-weight-bold">Username</label>
-                <input id="username" name="username" type="text" min="2" max="20" class="form-control"
-                       placeholder="Username"/>
+                <input id="username"
+                       name="username"
+                       type="text"
+                       min="2" max="20"
+                       class="form-control"
+                       placeholder="Username"
+                th:value="*{username}"/>
                 <p th:if="${#fields.hasErrors('username')}"
                         class="errors alert alert-danger">
                     Username is required.
