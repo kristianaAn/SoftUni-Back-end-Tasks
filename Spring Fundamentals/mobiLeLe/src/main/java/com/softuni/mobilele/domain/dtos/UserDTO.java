@@ -1,9 +1,11 @@
 package com.softuni.mobilele.domain.dtos;
 
 import com.softuni.mobilele.domain.enums.Role;
+import com.softuni.mobilele.validations.passMatcher.PasswordsMatch;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@PasswordsMatch(password = "password", confirmPassword = "confirmPassword")
 public class UserDTO extends BaseEntityDTO{
 
     @Size(min = 5, max = 20)

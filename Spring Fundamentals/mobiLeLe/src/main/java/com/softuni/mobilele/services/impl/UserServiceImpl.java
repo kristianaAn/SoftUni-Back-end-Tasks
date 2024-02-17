@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Date;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -35,22 +34,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO loginUser(LoginUserDTO loginUser) {
-        Optional<User> optionalUser = this.usersRepository
-                .findByUsername(loginUser.getUsername());
+    public void loginUser(LoginUserDTO loginUser) {
 
-        UserDTO userDTO = optionalUser.isPresent() && optionalUser.get().getPassword().equals(loginUser.getPassword())
-                ? modelMapper.map(optionalUser.get(), UserDTO.class)
-                : new UserDTO();
+        UserDTO mapped = this.modelMapper
+                .map(this.usersRepository.findByUsername(loginUser.getUsername()).get(), UserDTO.class);
 
-        if (userDTO.getId() > 0) {
-            this.loggedUser.setId(userDTO.getId());
-            this.loggedUser.setUsername(userDTO.getUsername());
-            this.loggedUser.setFirstName(userDTO.getFirstName());
-            this.loggedUser.setRole(String.valueOf(userDTO.getRole()));
-        }
-
-        return userDTO;
+        this.loggedUser.setId(mapped.getId());
+            this.loggedUser.setUsername(mapped.getUsername());
+            this.loggedUser.setFirstName(mapped.getFirstName());
+            this.loggedUser.setRole(String.valueOf(mapped.getRole()));
 
     }
 

@@ -48,18 +48,22 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/login")
-    public ModelAndView getLoginPage(LoginUserDTO loginUser) {
+    public ModelAndView getLoginPage(LoginUserDTO loginUserDTO) {
         return super.view("auth-login");
     }
 
     @PostMapping("/login")
-    public String loggingIn(@Valid @ModelAttribute LoginUserDTO loginUserDTO) {
+    public ModelAndView loggingIn(@Valid @ModelAttribute(name = "loginUserDTO") LoginUserDTO loginUser,
+                            BindingResult bindingResult, ModelAndView modelAndView) {
 
-        if (this.userService.loginUser(loginUserDTO).getId() > 0) {
-            return "redirect:/";
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("auth-login");
+            return modelAndView;
         }
-        return "redirect:/users/login";
 
+        this.userService.loginUser(loginUser);
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)

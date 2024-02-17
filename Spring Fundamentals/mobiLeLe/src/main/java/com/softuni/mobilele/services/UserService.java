@@ -6,7 +6,7 @@ import com.softuni.mobilele.domain.dtos.UserDTO;
 public interface UserService {
     UserDTO saveUserRegistrationInfo(UserDTO userDTO);
 
-    UserDTO loginUser(LoginUserDTO loginUser);
+    void loginUser(LoginUserDTO loginUser);
 
     void logout();
 }

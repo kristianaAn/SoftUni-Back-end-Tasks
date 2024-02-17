@@ -1,8 +1,10 @@
 package com.softuni.mobilele.domain.dtos;
 
+import com.softuni.mobilele.validations.loginUserMatcher.LoginUserMatcher;
 import jakarta.validation.constraints.NotNull;
 
-public class LoginUserDTO {
+@LoginUserMatcher
+public class LoginUserDTO extends BaseEntityDTO{
     private String username;
     private String password;
 
