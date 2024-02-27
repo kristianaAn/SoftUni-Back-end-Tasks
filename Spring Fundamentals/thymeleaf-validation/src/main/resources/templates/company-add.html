@@ -4,20 +4,7 @@
 <body>
 
 <header>
-    <nav class="navbar navbar-expand-lg navbar-toggler bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link text-white" href="/companies/add">Add Company</a>
-                <a class="nav-item nav-link text-white" href="/employees/add">Add Employee</a>
-                <a class="nav-item nav-link text-white" href="/companies/all">All Companies</a>
-                <a class="nav-item nav-link text-white" href="/employees/all">All Employees</a>
-            </div>
-        </div>
-    </nav>
+    <nav th:replace="~{fragments/navbar}"></nav>
 </header>
 <div class="row">
     <div class="col-md-2"></div>
@@ -25,33 +12,50 @@
         <div class="justify-content-center">
             <h1>Add Company</h1>
         </div>
-        <form class="m-md-auto w-50 text-center">
+        <form th:action="@{companies/add}"
+              th:method="POST"
+              th:object="${companyDTO}"
+                class="m-md-auto w-50 text-center">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control text-center" id="name" aria-describedby="nameHelp" 
+                <input type="text"
+                       class="form-control text-center"
+                       id="name"
+                       aria-describedby="nameHelp"
 				name="name"/>
-                <small>Error message</small>
+                <small th:if="${#fields.hasErrors('name')}">
+                    Name length must be between 2 and 10</small>
             </div>
 
             <div class="form-group">
                 <label for="town">Town</label>
-                <input type="text" class="form-control text-center" id="town" aria-describedby="town" 
+                <input type="text"
+                       class="form-control text-center"
+                       id="town"
+                       aria-describedby="town"
 				name="town"/>
-                <small>Error message</small>
+                <small th:if="${#fields.hasErrors('town')}">Town length must be between 2 and 10</small>
             </div>
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <input type="text" class="form-control text-center" 
-				id="description" aria-describedby="description" name="description"/>
-                <small>Error message</small>
+                <input type="text"
+                       class="form-control text-center"
+				id="description"
+                       aria-describedby="description"
+                       name="description"/>
+                <small th:if="${#fields.hasErrors('description')}">Description length must be more than 10</small>
             </div>
 
             <div class="form-group">
                 <label for="budget">Budget</label>
-                <input type="number" min="0" class="form-control text-center" 
-				id="budget" aria-describedby="town" name="town"/>
-                <small>Budget</small>
+                <input type="number"
+                       min="0"
+                       class="form-control text-center"
+				id="budget"
+                       aria-describedby="town"
+                       name="town"/>
+                <small th:if="${#fields.hasErrors('budget')}">Budget must be a positive number</small>
             </div>
 
             <button type="submit" class="btn btn-secondary">Add Company</button>
