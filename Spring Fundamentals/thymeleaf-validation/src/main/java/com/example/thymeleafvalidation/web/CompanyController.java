@@ -44,13 +44,18 @@ public class CompanyController extends BaseController {
         return mv;
     }
 
-    @GetMapping("{id}")
-    public ModelAndView getCompanyDetails(@PathVariable Long id, @ModelAttribute(name = "company") CompanyDTO companyDTO,
-                                          ModelAndView mv) {
+    @GetMapping("/{id}")
+    public ModelAndView getCompanyDetails(@PathVariable Long id, ModelAndView mv) {
 
-        mv.addObject("company", this.companyService.findCompanyById(id));
         mv.setViewName("company-details");
+        mv.addObject("company", this.companyService.findCompanyById(id));
 
         return mv;
+    }
+
+    @DeleteMapping("/{id}")
+    public ModelAndView deleteCompany(@PathVariable("id") Long id) {
+        this.companyService.deleteCompanyById(id);
+        return this.redirect("/companies/all");
     }
 }

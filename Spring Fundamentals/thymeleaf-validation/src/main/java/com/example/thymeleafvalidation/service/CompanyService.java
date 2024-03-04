@@ -10,6 +10,7 @@ public interface CompanyService {
 
     List<CompanyDTO> findAllCompanies();
 
-
     Company findCompanyById(long id);
+
+    void deleteCompanyById(long id);
 }
