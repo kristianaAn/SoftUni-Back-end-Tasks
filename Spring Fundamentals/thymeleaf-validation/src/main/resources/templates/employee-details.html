@@ -14,16 +14,17 @@
                 <div class="justify-content-center">
                     <h1>Employee Details</h1>
                 </div>
-                <div class="row">
+                <div th:object="${employee}"
+                             class="row">
                     <div class="col-md-6 bg-dark">
                         <h2>Employee</h2>
-                        <h4>First Name: {firstName}</h4>
-                        <h4>Last Name: {lastName}</h4>
-                        <h4>Education Level: {educationLevel}</h4>
-                        <h4>Job title: {jobTitle}</h4>
-                        <h4>Birthdate: {birthDate}</h4>
-                        <h4>Salary: {salary in format 10$}</h4>
-                        <h4>Company: {company name}</h4>
+                        <h4>First Name: <strong th:text="*{firstName}"></strong></h4>
+                        <h4>Last Name: <strong th:text="*{lastName}"></strong></h4>
+                        <h4>Education Level: <strong th:text="*{educationLevel}"></strong></h4>
+                        <h4>Job title: <strong th:text="*{jobTitle}"></strong></h4>
+                        <h4>Birthdate: <strong th:text="*{birthDate}"></strong></h4>
+                        <h4>Salary: <strong th:text="(*{salary} + ' $')"></strong></h4>
+                        <h4>Company: <strong th:text="*{company}"></strong></h4>
                         <div class="align-bottom">
 						<a class="btn btn-danger align-bottom"
                                                      href="/">Delete employee</a>
