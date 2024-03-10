@@ -15,4 +15,8 @@ public interface EmployeesRepository extends JpaRepository<Employee, Long> {
 
     @Override
     Optional<Employee> findById(Long aLong);
+
+    @Override
+    void deleteById(Long aLong);
+
 }

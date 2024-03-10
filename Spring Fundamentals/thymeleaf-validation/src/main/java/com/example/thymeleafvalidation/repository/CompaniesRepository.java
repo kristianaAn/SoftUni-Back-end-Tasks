@@ -18,4 +18,7 @@ public interface CompaniesRepository extends JpaRepository<Company, Long> {
 
     @Override
     void deleteById(Long id);
+
+    Company findByName(String name);
+
 }

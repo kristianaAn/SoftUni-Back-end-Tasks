@@ -1,9 +1,6 @@
 package com.example.thymeleafvalidation.domain.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +12,6 @@ import java.time.LocalDate;
 @Table(name = "employees")
 @Getter
 @Setter
-@AllArgsConstructor
 public class Employee extends BaseEntity {
 
     @Column(nullable = false)
@@ -25,18 +21,19 @@ public class Employee extends BaseEntity {
     private String educationLevel;
 
     @Column(name = "first_name", nullable = false)
-    private String firstName; /*Must be at least 2 characters. Cannot be null.*/
+    private String firstName;
 
     @Column(name = "job_title", nullable = false)
     private String jobTitle;
 
     @Column(name = "last_name", nullable = false)
-    private String lastName; /*Must be at least 2 characters. Cannot be null.*/
+    private String lastName;
 
     @Column(nullable = false)
-    private BigDecimal salary; /*(must be a positive number)*/
+    private BigDecimal salary;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
     private Company company;
 
     public Employee() {

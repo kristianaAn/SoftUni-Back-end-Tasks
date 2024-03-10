@@ -28,7 +28,7 @@
                         <h4>Budget: <strong th:text="*{budget}"></strong></h4>
 
                         <form th:action="@{'/companies/' + *{id}}"
-                              th:method="delete">
+                              th:method="DELETE">
                             <input class="btn btn-danger align-bottom" type="submit" value="Delete company">
                         </form>
                     </div>

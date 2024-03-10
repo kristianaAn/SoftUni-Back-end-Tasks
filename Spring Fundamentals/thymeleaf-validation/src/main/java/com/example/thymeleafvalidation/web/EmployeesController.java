@@ -1,6 +1,8 @@
 package com.example.thymeleafvalidation.web;
 
+import com.example.thymeleafvalidation.domain.dtos.CompanyDTO;
 import com.example.thymeleafvalidation.domain.dtos.EmployeeDTO;
+import com.example.thymeleafvalidation.domain.entities.Company;
 import com.example.thymeleafvalidation.service.CompanyService;
 import com.example.thymeleafvalidation.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -17,18 +19,24 @@ import java.util.List;
 public class EmployeesController extends BaseController {
 
     private final EmployeeService employeeService;
+    private final CompanyService companyService;
 
     @Autowired
-    public EmployeesController(EmployeeService employeeService, CompanyService companyService) {
+    public EmployeesController(EmployeeService employeeService, CompanyService companyService1) {
         this.employeeService = employeeService;
+        this.companyService = companyService1;
     }
 
     @GetMapping("/add")
-    public ModelAndView getAddEmployeePage(@ModelAttribute(name = "employeeDTO") EmployeeDTO employeeDTO) {
-        return super.view("employee-add");
+    public ModelAndView getAddEmployeePage(@ModelAttribute(name = "companies") Company company, EmployeeDTO employeeDTO,
+                                           ModelAndView mv) {
+        mv.addObject("companies", this.companyService.findAllCompanies());
+        mv.setViewName("employee-add");
+
+        return mv;
     }
 
-    @PostMapping("/add")
+    @PatchMapping("/add")
     public ModelAndView addEmployee(@Valid @ModelAttribute(name = "employeeDTO") EmployeeDTO employeeDTO,
                                     BindingResult br, ModelAndView mv) {
 
@@ -43,6 +51,7 @@ public class EmployeesController extends BaseController {
 
     @GetMapping("/all")
     public ModelAndView getAllEmployeesPage(@ModelAttribute(name = "employees") EmployeeDTO employeeDTO, ModelAndView mv) {
+
         List<EmployeeDTO> employeeDTOS = this.employeeService.findAllEmployees();
         mv.addObject("employees", employeeDTOS);
         mv.setViewName("employee-all");
@@ -51,11 +60,18 @@ public class EmployeesController extends BaseController {
     }
 
     @GetMapping("/{id}")
-    public ModelAndView getEmployeeDetails(@PathVariable Long id, ModelAndView mv) {
+    public ModelAndView getEmployeeDetails(@PathVariable Long id, CompanyDTO companyDTO, ModelAndView mv) {
 
-        mv.setViewName("employee-details");
         mv.addObject("employee", this.employeeService.findEmployeeById(id));
+        mv.setViewName("employee-details");
 
         return mv;
+    }
+
+    @DeleteMapping("/{id}")
+    public ModelAndView deleteEmployee(@PathVariable Long id) {
+        this.employeeService.deleteEmployeeById(id);
+
+        return this.redirect("/employees/all");
     }
 }

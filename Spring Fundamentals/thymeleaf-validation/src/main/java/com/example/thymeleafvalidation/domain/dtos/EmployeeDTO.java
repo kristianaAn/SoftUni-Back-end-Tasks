@@ -37,4 +37,5 @@ public class EmployeeDTO extends BaseEntityDTO {
     private BigDecimal salary;
     public EmployeeDTO() {
     }
+
 }
